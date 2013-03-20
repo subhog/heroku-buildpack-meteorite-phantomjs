@@ -165,8 +165,8 @@ echo "-----> Installing meteorite with npm"
 run_npm "install meteorite -g"
 echo "Meteorite installed" | indent
 
-run_npm "install phantonjs -g"
-echo "Phantonjs installed" | indent
+run_npm "install phantomjs -g"
+echo "Phantomjs installed" | indent
 
 METEOR_BUILD_DIR="$BUILD_DIR/.meteor/heroku_build"
 mkdir -p "$HOME"
