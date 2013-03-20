@@ -165,6 +165,9 @@ echo "-----> Installing meteorite with npm"
 run_npm "install meteorite -g"
 echo "Meteorite installed" | indent
 
+run_npm "install phantonjs -g"
+echo "Phantonjs installed" | indent
+
 METEOR_BUILD_DIR="$BUILD_DIR/.meteor/heroku_build"
 mkdir -p "$HOME"
 ############################################
@@ -189,7 +192,7 @@ echo "Setting up MONGO_URL in .profile.d"
 mkdir -p $BUILD_DIR/.profile.d
 cat > $BUILD_DIR/.profile.d/mongo.sh <<EOF
   #!/bin/sh
-  
+
   export MONGO_URL=\${MONGO_URL:-\$MONGOHQ_URL};
 EOF
 
