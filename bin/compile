@@ -214,7 +214,8 @@ cat > $BUILD_DIR/.profile.d/mongo.sh <<EOF
 EOF
 
 # vendor node into the slug
-PATH="$METEOR_BUILD_DIR/bin:$PATH"
+PATH="$METEOR_BUILD_DIR/bin:/app/vendor/phantomjs/bin:$PATH"
+LD_LIBRARY_PATH="/usr/local/lib:/usr/lib:/lib:/app/vendor/phantomjs/lib"
 echo "-----> Vendoring node into slug"
 mkdir -p "$METEOR_BUILD_DIR/bin"
 cp "$VENDORED_NODE/bin/node" "$METEOR_BUILD_DIR/bin/node"
