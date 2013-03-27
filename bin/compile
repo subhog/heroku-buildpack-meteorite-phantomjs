@@ -183,7 +183,7 @@ tar -zxf $CACHE_DIR/bundle.tar.gz --strip-components 1 -C $METEOR_BUILD_DIR/app
 rm $CACHE_DIR/bundle.tar.gz
 ############################################
 
-## add phantomjs
+## phantomjs
 
 PHANTOMJSVERSION="1.8.1"
 S3_BUCKET="stomita-buildpack-phantomjs"
@@ -199,8 +199,8 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
 fi
 
 echo "-----> Extracting PhantomJS binaries"
-tar zxf $CACHE_DIR/$FILE_NAME -C $METEOR_BUILD_DIR/bin/phantomjs
-rm $CACHE_DIR/$FILE_NAME
+mkdir -p $METEOR_BUILD_DIR/vendor/phantomjs
+tar zxf $CACHE_DIR/$FILE_NAME -C $METEOR_BUILD_DIR/vendor/phantomjs
 
 ############################################
 # Prepare ENV vars
