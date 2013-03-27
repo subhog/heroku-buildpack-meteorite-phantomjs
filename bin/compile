@@ -183,23 +183,6 @@ tar -zxf $CACHE_DIR/bundle.tar.gz --strip-components 1 -C $METEOR_BUILD_DIR/app
 rm $CACHE_DIR/bundle.tar.gz
 ############################################
 
-############################################
-# Prepare ENV vars
-############################################
-echo "Setting up MONGO_URL in .profile.d"
-mkdir -p $BUILD_DIR/.profile.d
-cat > $BUILD_DIR/.profile.d/mongo.sh <<EOF
-  #!/bin/sh
-
-  export MONGO_URL=\${MONGO_URL:-\$MONGOHQ_URL};
-EOF
-
-# vendor node into the slug
-PATH="$METEOR_BUILD_DIR/bin:$PATH"
-echo "-----> Vendoring node into slug"
-mkdir -p "$METEOR_BUILD_DIR/bin"
-cp "$VENDORED_NODE/bin/node" "$METEOR_BUILD_DIR/bin/node"
-
 ## add phantomjs
 
 PHANTOMJSVERSION="1.8.1"
@@ -216,5 +199,22 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
 fi
 
 echo "-----> Extracting PhantomJS binaries"
-tar zxf $CACHE_DIR/$FILE_NAME -C $METEOR_BUILD_DIR/vendor/phantomjs
+tar zxf $CACHE_DIR/$FILE_NAME -C $METEOR_BUILD_DIR/bin/phantomjs
 rm $CACHE_DIR/$FILE_NAME
+
+############################################
+# Prepare ENV vars
+############################################
+echo "Setting up MONGO_URL in .profile.d"
+mkdir -p $BUILD_DIR/.profile.d
+cat > $BUILD_DIR/.profile.d/mongo.sh <<EOF
+  #!/bin/sh
+
+  export MONGO_URL=\${MONGO_URL:-\$MONGOHQ_URL};
+EOF
+
+# vendor node into the slug
+PATH="$METEOR_BUILD_DIR/bin:$PATH"
+echo "-----> Vendoring node into slug"
+mkdir -p "$METEOR_BUILD_DIR/bin"
+cp "$VENDORED_NODE/bin/node" "$METEOR_BUILD_DIR/bin/node"
