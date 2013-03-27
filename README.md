@@ -1,6 +1,8 @@
-# Heroku buildpack: Meteorite
+# Heroku buildpack: Meteorite with Phantomjs
 
 This build pack allows you to easily deploy meteor apps to heroku using [meteorite](http://github.com/oortcloud/meteorite). It's easy to use different branches of meteor and any smart package you can lay your hands on.
+
+This version includes Phantomjs to allow the spiderable package to function correctly.
 
 ## Usage
 
@@ -21,7 +23,7 @@ heroku config:add ROOT_URL=your.domain.com
 You can specify meteor settings by setting the `METEOR_SETTINGS` environment variable:
 
 ```bash
-heroku config:add METEOR_SETTINGS='{"herp":"derp"}'
+heroku config:add METEOR_SETTINGS='{"key":"value"}'
 ```
 
 
