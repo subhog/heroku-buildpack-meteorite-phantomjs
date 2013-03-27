@@ -165,11 +165,9 @@ echo "-----> Installing meteorite with npm"
 run_npm "install meteorite -g"
 echo "Meteorite installed" | indent
 
-run_npm "install phantomjs -g"
-echo "Phantomjs installed" | indent
-
 METEOR_BUILD_DIR="$BUILD_DIR/.meteor/heroku_build"
 mkdir -p "$HOME"
+
 ############################################
 # install meteor + packages through mrt
 # bundle, and install into app/
@@ -201,3 +199,21 @@ PATH="$METEOR_BUILD_DIR/bin:$PATH"
 echo "-----> Vendoring node into slug"
 mkdir -p "$METEOR_BUILD_DIR/bin"
 cp "$VENDORED_NODE/bin/node" "$METEOR_BUILD_DIR/bin/node"
+
+## add phantomjs
+
+PHANTOMJSVERSION="1.8.1"
+S3_BUCKET="stomita-buildpack-phantomjs"
+
+# s3 packages
+FILE_NAME="buildpack-phantomjs-${PHANTOMJSVERSION}.tar.gz"
+BUILDPACK_PHANTOMJS_PACKAGE="http://${S3_BUCKET}.s3.amazonaws.com/${FILE_NAME}"
+
+if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
+  echo "-----> Fetching PhantomJS buildpack binaries"
+  curl $BUILDPACK_PHANTOMJS_PACKAGE -s -o $CACHE_DIR/$FILE_NAME
+fi
+
+echo "-----> Extracting PhantomJS binaries"
+tar zxf $CACHE_DIR/$FILE_NAME -C $METEOR_BUILD_DIR/vendor/phantomjs
+rm $CACHE_DIR/$FILE_NAME
