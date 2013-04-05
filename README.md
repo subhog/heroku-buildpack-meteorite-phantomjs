@@ -7,7 +7,7 @@ This version includes Phantomjs to allow the spiderable package to function corr
 ## Usage
 
 ```bash
-heroku create --stack cedar --buildpack https://github.com/oortcloud/heroku-buildpack-meteorite.git
+heroku create --stack cedar --buildpack https://github.com/cwaring/heroku-buildpack-meteorite-phantomjs.git
 ```
 
 Then `git push` to heroku as usual.
@@ -18,6 +18,13 @@ You need to set the `ROOT_URL` environment variable:
 
 ```bash
 heroku config:add ROOT_URL=your.domain.com
+```
+
+If you are not running this as a fresh buildpack you will need to setup the environment paths correctly:
+
+```bash
+heroku config:add LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib:/app/vendor/phantomjs/lib
+heroku config:add PATH=bin:.meteor/heroku_build/bin:node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/app/vendor/phantomjs/bin
 ```
 
 You can specify meteor settings by setting the `METEOR_SETTINGS` environment variable:
