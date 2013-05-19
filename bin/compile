@@ -210,7 +210,7 @@ mkdir -p $BUILD_DIR/.profile.d
 cat > $BUILD_DIR/.profile.d/mongo.sh <<EOF
   #!/bin/sh
 
-  export MONGO_URL=\${MONGO_URL:-\$MONGOHQ_URL};
+  export MONGO_URL=\${MONGO_URL:-\$MONGOLAB_URI};
 EOF
 
 # vendor node into the slug
