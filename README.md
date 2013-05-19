@@ -2,12 +2,12 @@
 
 This build pack allows you to easily deploy meteor apps to heroku using [meteorite](http://github.com/oortcloud/meteorite). It's easy to use different branches of meteor and any smart package you can lay your hands on.
 
-This version includes Phantomjs to allow the spiderable package to function correctly.
+This version includes Phantomjs 1.9.0 to allow the spiderable package to function correctly and uses MONGOLAB_URI for MONGO_URL
 
 ## Usage
 
 ```bash
-heroku create --stack cedar --buildpack https://github.com/cwaring/heroku-buildpack-meteorite-phantomjs.git
+heroku create --stack cedar --buildpack https://github.com/areed/heroku-buildpack-meteorite-phantomjs.git
 ```
 
 Then `git push` to heroku as usual.
