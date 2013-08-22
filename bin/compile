@@ -101,6 +101,8 @@ function package_download() {
   curl $package -s -o - | tar xzf - -C $location
 }
 
+echo "-----> BUILDPACK LOADED"
+
 bootstrap_node=$(mktmpdir bootstrap_node)
 package_download "nodejs" "0.4.7" $bootstrap_node
 
