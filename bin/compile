@@ -173,14 +173,17 @@ mkdir -p "$HOME"
 # bundle, and install into app/
 ############################################
 cd $BUILD_DIR
-echo "Installing meteor" | indent
+echo "-> Installing meteor" | indent
 HOME="$BUILD_DIR" mrt install | indent
-echo "Building meteor bundle" | indent
-HOME="$BUILD_DIR" mrt bundle $CACHE_DIR/bundle.tar.gz 2>&1 | indent
-echo "Bundled" | indent
+echo "-> Building meteor bundle" | indent
+HOME="$BUILD_DIR" meteor bundle $CACHE_DIR/bundle.tar.gz 2>&1 | indent
+echo "-> Bundled" | indent
 mkdir -p $METEOR_BUILD_DIR/app
+echo "-> Unpacking bundle" | indent
 tar -zxf $CACHE_DIR/bundle.tar.gz --strip-components 1 -C $METEOR_BUILD_DIR/app
+echo "-> Bundle unpacked" | indent
 rm $CACHE_DIR/bundle.tar.gz
+echo "-> Bundle cleared" | indent
 ############################################
 
 ## phantomjs
