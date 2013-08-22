@@ -177,19 +177,21 @@ echo "-> Installing meteor" | indent
 # Using different folder to prevent install script form deleting packages file
 VENDORED_METEOR="$(mktmpdir meteor)"
 curl https://install.meteor.com | HOME="$VENDORED_METEOR" /bin/sh | indent
-echo "Meteor installed" | indent
+echo "->Meteor installed" | indent
 
-echo "Installing packages" | indent
+
+echo "->Installing packages" | indent
 HOME="$BUILD_DIR" mrt install | indent
-echo "-> Building meteor bundle" | indent
-HOME="$BUILD_DIR" meteor bundle $CACHE_DIR/bundle.tar.gz 2>&1 | indent
+echo "->Building meteor bundle" | indent
+HOME="$VENDORED_METEOR" "$VENDORED_METEOR"/.meteor/meteor bundle "$CACHE_DIR"/bundle.tar.gz 2>&1 | indent
 echo "-> Bundled" | indent
-mkdir -p $METEOR_BUILD_DIR/app
+mkdir -p "$METEOR_BUILD_DIR"/app
 echo "-> Unpacking bundle" | indent
-tar -zxf $CACHE_DIR/bundle.tar.gz --strip-components 1 -C $METEOR_BUILD_DIR/app
+tar -zxf "$CACHE_DIR"/bundle.tar.gz --strip-components 1 -C "$METEOR_BUILD_DIR"/app
 echo "-> Bundle unpacked" | indent
-rm $CACHE_DIR/bundle.tar.gz
+rm "$CACHE_DIR"/bundle.tar.gz
 echo "-> Bundle cleared" | indent
+
 ############################################
 
 ## phantomjs
