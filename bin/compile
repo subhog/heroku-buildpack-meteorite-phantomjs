@@ -196,7 +196,7 @@ echo "-> Bundle cleared" | indent
 
 ## phantomjs
 
-PHANTOMJSVERSION="1.9.1"
+PHANTOMJSVERSION="1.9.2"
 S3_BUCKET="stomita-buildpack-phantomjs"
 
 # s3 packages
